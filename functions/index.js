@@ -4,16 +4,27 @@ const admin = require('firebase-admin');
 admin.initializeApp();
 const {TeamController} = require('./controllers/TeamController')
 
-// // Create and Deploy Your First Cloud Functions
-// // https://firebase.google.com/docs/functions/write-firebase-functions
-//
-// exports.helloWorld = functions.https.onRequest((request, response) => {
-//  response.send("Hello from Firebase!");
-// });
+const catchError = (err) =>{
+  console.log(err)
+  throw new functions.https.HttpsError('failed-precondition', err)
+}
+
+exports.getTeam = functions.https.onCall((data, context)=>{
+  return TeamController.getTeam(data, context, admin).catch(catchError)
+})
 
 exports.getTeams = functions.https.onCall((data, context)=>{
-  return TeamController.getTeams(data, context, admin).catch(err=>{
-    console.log(err)
-    throw new functions.https.HttpsError('failed-precondition', err)
-  })
+  return TeamController.getTeams(data, context, admin).catch(catchError)
+})
+
+exports.postTeam = functions.https.onCall((data, context)=>{
+  return TeamController.addTeam(data, context, admin).catch(catchError)
+})
+
+exports.putTeam = functions.https.onCall((data, context)=>{
+  return TeamController.updateTeam(data, context, admin).catch(catchError)
+})
+
+exports.deleteTeam = functions.https.onCall((data, context)=>{
+  return TeamController.deleteTeam(data, context, admin).catch(catchError)
 })
