@@ -23,6 +23,7 @@ class TeamController {
   }
 
   static updateTeam(data, context, admin){
+    data.nameSearch = data.name.toLowerCase()
     return admin.firestore().collection('users').doc(context.auth.uid)
       .collection('teams').doc(data.id).set(data).then(()=>{
         return true

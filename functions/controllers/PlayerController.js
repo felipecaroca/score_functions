@@ -23,6 +23,8 @@ class PlayerController {
   }
 
   static updatePlayer(data, context, admin){
+    data.mail = data.mail.toLowerCase()
+    data.nameSearch = data.name.toLowerCase()
     return admin.firestore().collection('users').doc(context.auth.uid)
       .collection('players').doc(data.id).set(data).then(()=>{
         return true
