@@ -17,7 +17,8 @@ class TeamController {
   static getTeam(data, context, admin){
     return admin.firestore().collection('users').doc(context.auth.uid)
       .collection('teams').doc(data.id).get().then(snapshot=>{
-        return snapshot
+        console.log(snapshot.data())
+        return snapshot.data()
       })
   }
 
@@ -35,14 +36,14 @@ class TeamController {
     data.nameSearch = data.name.toLowerCase()
     return admin.firestore().collection('users').doc(context.auth.uid)
       .collection('teams').doc(key).set(data).then(()=>{
-        return true
+        return key
       })
   }
 
   static deleteTeam(data, context, admin){
     return admin.firestore().collection('users').doc(context.auth.uid)
       .collection('teams').doc(data.id).delete().then(()=>{
-        return true
+        return data.id
       })
   }
 }
