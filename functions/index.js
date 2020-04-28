@@ -84,7 +84,7 @@ exports.getFormation = functions.https.onCall((data, context)=>{
   return FormationController.getFormation(data, context, admin).catch(catchError)
 })
 
-exports.getFormations = functions.https.onCall((data, context)=>{
+exports.listFormations = functions.https.onCall((data, context)=>{
   return FormationController.getFormations(data, context, admin).catch(catchError)
 })
 
@@ -92,7 +92,7 @@ exports.postFormation = functions.https.onCall((data, context)=>{
   return FormationController.addFormation(data, context, admin).catch(catchError)
 })
 
-exports.putFormation = functions.https.onCall((data, context)=>{
+exports.updateFormation = functions.https.onCall((data, context)=>{
   return FormationController.updateFormation(data, context, admin).catch(catchError)
 })
 
