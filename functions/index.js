@@ -5,6 +5,7 @@ admin.initializeApp();
 const {TeamController} = require('./controllers/TeamController')
 const {PlayerController} = require('./controllers/PlayerController')
 const {SoccerGameController} = require('./controllers/SoccerGameController')
+const {FormationController} = require('./controllers/FormationController')
 
 const catchError = (err) =>{
   console.log(err)
@@ -75,4 +76,26 @@ exports.putSoccerGame = functions.https.onCall((data, context)=>{
 
 exports.deleteSoccerGame = functions.https.onCall((data, context)=>{
   return SoccerGameController.deleteSoccerGame(data, context, admin).catch(catchError)
+})
+
+/********************* FORMATIONS ***********************/
+
+exports.getFormation = functions.https.onCall((data, context)=>{
+  return FormationController.getFormation(data, context, admin).catch(catchError)
+})
+
+exports.getFormations = functions.https.onCall((data, context)=>{
+  return FormationController.getFormations(data, context, admin).catch(catchError)
+})
+
+exports.postFormation = functions.https.onCall((data, context)=>{
+  return FormationController.addFormation(data, context, admin).catch(catchError)
+})
+
+exports.putFormation = functions.https.onCall((data, context)=>{
+  return FormationController.updateFormation(data, context, admin).catch(catchError)
+})
+
+exports.deleteFormation = functions.https.onCall((data, context)=>{
+  return FormationController.deleteFormation(data, context, admin).catch(catchError)
 })
