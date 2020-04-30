@@ -7,6 +7,7 @@ const {PlayerController} = require('./controllers/PlayerController')
 const {SoccerGameController} = require('./controllers/SoccerGameController')
 const {FormationController} = require('./controllers/FormationController')
 
+
 const catchError = (err) =>{
   console.log(err)
   throw new functions.https.HttpsError('failed-precondition', err)
