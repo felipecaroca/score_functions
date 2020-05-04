@@ -2,9 +2,14 @@ class SoccerGameController {
   static getSoccerGames(data, context, admin){
     let reference = admin.firestore().collection('users').doc(context.auth.uid)
       .collection('soccer_games')
+      .orderBy('gameDate', 'desc')
 
     if (data.gameDate)
       reference = reference.where('gameDate', '==', data.gameDate)
+    if (data.gameFinished)
+      reference = reference.where('gameFinished', '==', data.gameFinished)
+    if(data.limit)
+      reference = reference.limit(data.limit)
 
     return reference.get().then(snapshot=>{
       let list = []
